@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 import static org.junit.Assert.assertEquals;
 import static ru.alfabank.tests.core.helpers.PropertyLoader.loadProperty;
+import static ru.netology.web.data.DataHelper.resetBalance;
 
 public class TemplateSteps {
   private final AkitaScenario scenario = AkitaScenario.getInstance();
@@ -35,7 +36,11 @@ public class TemplateSteps {
 
   @Когда("^он переводит \"([^\"]*)\" рублей с карты с номером \"([^\"]*)\" на свою \"([^\"]*)\" карту с главной страницы")
   public void transfer(String amount, String fromCard, int toCardCount) {
+
     val dashboardPage = (DashboardPage) scenario.getCurrentPage().appeared();
+    int firstCardBalance = dashboardPage.getCardBalance(1);
+    int secondCardBalance = dashboardPage.getCardBalance(2);
+    resetBalance(firstCardBalance, secondCardBalance);
     scenario.setCurrentPage(dashboardPage.transfer(toCardCount));
     val transferPage = (TransferPage) scenario.getCurrentPage().appeared();
     scenario.setCurrentPage(transferPage.transferAmount(amount.trim(), fromCard.trim()));

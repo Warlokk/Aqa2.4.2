@@ -17,8 +17,8 @@ public class DashboardPage extends AkitaPage {
 
     private static final String transferButton = " [data-test-id=action-deposit]";
 
-    public static int getCardBalance(int toCardCount) {
-        String text = $$(".list__item").get(toCardCount - 1).getText();
+    public static int getCardBalance(int cardCount) {
+        String text = $$(".list__item").get(cardCount - 1).getText();
         return extractBalance(text);
     }
 

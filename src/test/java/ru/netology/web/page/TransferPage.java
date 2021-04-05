@@ -15,16 +15,16 @@ import static org.openqa.selenium.Keys.*;
 public class TransferPage extends AkitaPage {
 
     @FindBy(css = "[data-test-id=amount] .input__control")
-    private SelenideElement amount;
+    private static SelenideElement amount;
     @FindBy(css = "[data-test-id='from'] .input__control")
-    private SelenideElement fromCard;
+    private static SelenideElement fromCard;
     @FindBy(css = "[data-test-id=action-transfer]")
-    private SelenideElement submitTransfer;
+    private static SelenideElement submitTransfer;
     @FindBy(css = "[data-test-id=action-cancel]")
-    private SelenideElement cancelTransfer;
+    private static SelenideElement cancelTransfer;
 
-    public DashboardPage transferAmount(String sum, String from) {
-        amount.sendKeys(CONTROL + "a", DELETE, sum);
+    public static DashboardPage transferAmount(String sum, String from) {
+        amount.sendKeys(CONTROL + "a", DELETE);
         amount.setValue(sum);
         fromCard.sendKeys(CONTROL + "a", DELETE);
         fromCard.setValue(from);
